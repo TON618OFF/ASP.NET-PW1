@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Отзывы";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="reviews-section">
+    <h3>Оставьте свой отзыв</h3>
+        <div class="form-group">
+            <label for="name">Ваше имя:</label>
+            <input type="text" id="name" name="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="review">Ваш отзыв:</label>
+            <textarea id="review" name="review" class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+
+    @if (ViewBag.Message != null)
+    {
+        <p class="alert alert-success mt-3">@ViewBag.Message</p>
+    }
+</div>
+
+<hr />
+
+<div class="reviews-list">
+    <h3>Отзывы наших пользователей</h3>
+    <!-- Пример отображения отзывов -->
+    <div class="review-item">
+        <h4>Иван Иванов</h4>
+        <p>Отличный сервис! Очень доволен!</p>
+    </div>
+    <div class="review-item">
+        <h4>Анна Смирнова</h4>
+        <p>Быстрая доставка и качественный товар. Рекомендую!</p>
+    </div>
+    <!-- Здесь можно динамически загружать отзывы из базы данных -->
+</div>
+
+<style>
+    .reviews-section {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .reviews-list {
+        margin-top: 30px;
+    }
+
+    .review-item {
+        background-color: #f8f9fa;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+        .review-item h4 {
+            margin-bottom: 10px;
+        }
+</style>

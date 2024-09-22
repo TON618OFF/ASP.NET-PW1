@@ -1,0 +1,131 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .game_card {
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .game_card img {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+                margin-bottom: 15px;
+            }
+
+            .game_card h4 {
+                color: white;
+                text-align: center;
+                margin: 15px 0;
+            }
+
+            .game_card p {
+                color: white;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .game_card button {
+                width: 100%;
+                background-color: #28a745;
+                color: white;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .game_card button:hover {
+                    background-color: #218838;
+                }
+
+            .game_card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            }
+    </style>
+
+    <div class="catalog">
+
+        <div class="game_card">
+            <img src="https://avatars.mds.yandex.net/i?id=9d83358f771e45ee8cd53174d91721ce_l-4080895-images-thumbs&n=13" alt="RDR2">
+            <h4>Red Dead Redemption 2</h4>
+            <p>Цена: 2999 руб.</p>
+            <button>Купить</button>
+        </div>
+
+        <div class="game_card">
+            <img src="https://avatars.mds.yandex.net/i?id=31ee7a259587d9dcf70ae7dbef957bee_l-5278273-images-thumbs&n=13" alt="Minecraft">
+            <h4>Minecraft</h4>
+            <p>Цена: 1999 руб.</p>
+            <button>Купить</button>
+        </div>
+
+        <div class="game_card">
+            <img src="https://digiseller.mycdn.ink/preview/917076/p1_3235464_316bc221.jpg" alt="Katana Zero">
+            <h4>Katana Zero</h4>
+            <p>Цена: 799 руб.</p>
+            <button>Купить</button>
+        </div>
+
+        <div class="game_card">
+            <img src="https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/ncom/software/switch/70010000001702/dac3a26570b5ca1ddf703bf0add7cc7c527f71a2b56521baf69e20c7a573c610" alt="Terraria">
+            <h4>Terraria</h4>
+            <p>Цена: 499 руб.</p>
+            <button>Купить</button>
+        </div>
+
+        <div class="game_card">
+            <img src="https://avatars.mds.yandex.net/i?id=9d83358f771e45ee8cd53174d91721ce_l-4080895-images-thumbs&n=13" alt="RDR2">
+            <h4>Red Dead Redemption 2</h4>
+            <p>Цена: 2999 руб.</p>
+            <button>Купить</button>
+        </div>
+
+        <div class="game_card">
+            <img src="https://avatars.mds.yandex.net/i?id=31ee7a259587d9dcf70ae7dbef957bee_l-5278273-images-thumbs&n=13" alt="Minecraft">
+            <h4>Minecraft</h4>
+            <p>Цена: 1999 руб.</p>
+            <button>Купить</button>
+        </div>
+
+        <div class="game_card">
+            <img src="https://digiseller.mycdn.ink/preview/917076/p1_3235464_316bc221.jpg" alt="Katana Zero">
+            <h4>Katana Zero</h4>
+            <p>Цена: 799 руб.</p>
+            <button>Купить</button>
+        </div>
+
+        <div class="game_card">
+            <img src="https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/ncom/software/switch/70010000001702/dac3a26570b5ca1ddf703bf0add7cc7c527f71a2b56521baf69e20c7a573c610" alt="Terraria">
+            <h4>Terraria</h4>
+            <p>Цена: 499 руб.</p>
+            <button>Купить</button>
+        </div>
+
+    </div>
+    
+}
