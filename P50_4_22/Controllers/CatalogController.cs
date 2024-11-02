@@ -29,8 +29,9 @@ namespace P50_4_22.Controllers
         {
             return View();
         }
-        [HttpPost]
 
+
+        [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
             db.Products.Add(product);
@@ -63,8 +64,9 @@ namespace P50_4_22.Controllers
             }
             return NotFound();
         }
-        [HttpPost]
 
+
+        [HttpPost]
         public async Task<IActionResult> Edit(Product product)
         {
             db.Products.Update(product);
@@ -72,9 +74,9 @@ namespace P50_4_22.Controllers
             return RedirectToAction("Index");
         }
 
+
         [HttpGet]
         [ActionName("Delete")]
-
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
             if (id != null)
@@ -88,8 +90,8 @@ namespace P50_4_22.Controllers
             return NotFound();
         }
 
-        [HttpPost]
 
+        [HttpPost]
         public async Task<IActionResult> Delete(int? id)
         {
             if(id != null)
