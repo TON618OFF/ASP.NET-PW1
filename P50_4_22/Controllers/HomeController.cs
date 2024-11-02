@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using P50_4_22.Models;
 using System.Diagnostics;
 
@@ -6,16 +7,23 @@ namespace P50_4_22.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        public BulkinKeysContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(BulkinKeysContext context)
         {
-            _logger = logger;
+            db = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //var product = db.Products.ToList();
+            //var user = db.Clients.Include(u => u.IdClient).ToList();
+            //var pu = new ProductUserVM
+            //{
+            //    Products = product,
+            //    Users = user
+            //};
+            return View(await db.Products.ToListAsync());
         }
 
         public IActionResult Privacy()

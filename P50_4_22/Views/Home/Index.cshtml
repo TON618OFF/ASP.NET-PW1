@@ -2,39 +2,88 @@
     ViewData["Title"] = "Home Page";
 }
 
-<img src="https://steammachine.ru/op/403.jpg" width="1300px" style="display: grid;" />
-
-<div class="main_games" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; justify-content: space-around; margin-left: 12px">
-    <div class="game_example" style="background-color: #1c1c1c; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s, box-shadow 0.3s; overflow: hidden; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; height: 400px">
-        <img src="https://steammachine.ru/slider/3426053-220x126.webp" alt="forza horizon 4" style="width: 100%; height: auto; border-radius: 5px;" />
-        <h4 style="color: white; text-align: center; margin: 10px 0;">Forza Horizon 4</h4>
-        <p style="color: white; text-align: center; margin: 10px 0;">Цена: 1999 руб.</p>
-        <button style="width: 100%; background-color: #28a745; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Добавить в корзину</button>
-    </div>
-    <div class="game_example" style="background-color: #1c1c1c; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s, box-shadow 0.3s; overflow: hidden; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; height: 400px">
-        <img src="https://steammachine.ru/slider/3426053-220x126.webp" alt="forza horizon 4" style="width: 100%; height: auto; border-radius: 5px;" />
-        <h4 style="color: white; text-align: center; margin: 10px 0;">Forza Horizon 4</h4>
-        <p style="color: white; text-align: center; margin: 10px 0;">Цена: 1999 руб.</p>
-        <button style="width: 100%; background-color: #28a745; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Добавить в корзину</button>
-    </div>
-    <div class="game_example" style="background-color: #1c1c1c; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s, box-shadow 0.3s; overflow: hidden; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; height: 400px">
-        <img src="https://steammachine.ru/slider/3426053-220x126.webp" alt="forza horizon 4" style="width: 100%; height: auto; border-radius: 5px;" />
-        <h4 style="color: white; text-align: center; margin: 10px 0;">Forza Horizon 4</h4>
-        <p style="color: white; text-align: center; margin: 10px 0;">Цена: 1999 руб.</p>
-        <button style="width: 100%; background-color: #28a745; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Добавить в корзину</button>
-    </div>
-</div>
-
 <style>
-    .game_example:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    body {
+        background-color: #ffffff;
+        font-family: monospace, sans-serif;
+        font-weight: bold;
     }
 
-    .game_example button:hover {
-        background-color: #218838;
+    .catalog {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 1px auto;
+        padding: 20px;
     }
+
+    .game_card {
+        background-color: #1c1c1c;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .game_card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .game_card h4 {
+            color: white;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .game_card p {
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .game_card button {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .game_card button:hover {
+                background-color: #218838;
+            }
+
+        .game_card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
 </style>
 
+
+<img src="https://steammachine.ru/op/403.jpg" width="1300px" style="display: grid; margin-bottom: 0px;" />
+
+
+
+<div class="catalog">
+    @foreach (var i in Model)
+    {
+        <div class="game_card">
+            <img src="~/images/@i.ProductImage" alt="@i.ProductImage">
+            <h4>@i.ProductName</h4>
+            <p>Цена: @i.ProductPrice руб.</p>
+            <button>Купить</button>
+        </div>
+    }
+</div>
 
 

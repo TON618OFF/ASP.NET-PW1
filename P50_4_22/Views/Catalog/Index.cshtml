@@ -1,19 +1,21 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model IEnumerable<P50_4_22.Models.Product>
 @{
     <style>
         body {
-            background-color: #f1f1f1;
-            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            font-family: monospace, sans-serif;
+            font-weight: bold;
         }
 
         .catalog {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 1px auto;
             padding: 20px;
         }
 
@@ -68,64 +70,20 @@
             }
     </style>
 
+    <h1 style="margin-top: 50px;">Catalog</h1>
+
     <div class="catalog">
-
+        @foreach (var i in Model)
+        {
         <div class="game_card">
-            <img src="https://avatars.mds.yandex.net/i?id=9d83358f771e45ee8cd53174d91721ce_l-4080895-images-thumbs&n=13" alt="RDR2">
-            <h4>Red Dead Redemption 2</h4>
-            <p>Цена: 2999 руб.</p>
+            <a asp-action="Details" asp-asp-controller="Home" asp-route-id="@i.IdProduct">
+                <img src="~/images/@i.ProductImage" alt="@i.ProductImage">
+            </a>
+            <h4>@i.ProductName</h4>
+            <p>Цена: @i.ProductPrice руб.</p>
             <button>Купить</button>
         </div>
-
-        <div class="game_card">
-            <img src="https://avatars.mds.yandex.net/i?id=31ee7a259587d9dcf70ae7dbef957bee_l-5278273-images-thumbs&n=13" alt="Minecraft">
-            <h4>Minecraft</h4>
-            <p>Цена: 1999 руб.</p>
-            <button>Купить</button>
-        </div>
-
-        <div class="game_card">
-            <img src="https://digiseller.mycdn.ink/preview/917076/p1_3235464_316bc221.jpg" alt="Katana Zero">
-            <h4>Katana Zero</h4>
-            <p>Цена: 799 руб.</p>
-            <button>Купить</button>
-        </div>
-
-        <div class="game_card">
-            <img src="https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/ncom/software/switch/70010000001702/dac3a26570b5ca1ddf703bf0add7cc7c527f71a2b56521baf69e20c7a573c610" alt="Terraria">
-            <h4>Terraria</h4>
-            <p>Цена: 499 руб.</p>
-            <button>Купить</button>
-        </div>
-
-        <div class="game_card">
-            <img src="https://avatars.mds.yandex.net/i?id=9d83358f771e45ee8cd53174d91721ce_l-4080895-images-thumbs&n=13" alt="RDR2">
-            <h4>Red Dead Redemption 2</h4>
-            <p>Цена: 2999 руб.</p>
-            <button>Купить</button>
-        </div>
-
-        <div class="game_card">
-            <img src="https://avatars.mds.yandex.net/i?id=31ee7a259587d9dcf70ae7dbef957bee_l-5278273-images-thumbs&n=13" alt="Minecraft">
-            <h4>Minecraft</h4>
-            <p>Цена: 1999 руб.</p>
-            <button>Купить</button>
-        </div>
-
-        <div class="game_card">
-            <img src="https://digiseller.mycdn.ink/preview/917076/p1_3235464_316bc221.jpg" alt="Katana Zero">
-            <h4>Katana Zero</h4>
-            <p>Цена: 799 руб.</p>
-            <button>Купить</button>
-        </div>
-
-        <div class="game_card">
-            <img src="https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/ncom/software/switch/70010000001702/dac3a26570b5ca1ddf703bf0add7cc7c527f71a2b56521baf69e20c7a573c610" alt="Terraria">
-            <h4>Terraria</h4>
-            <p>Цена: 499 руб.</p>
-            <button>Купить</button>
-        </div>
-
+        }
     </div>
     
 }

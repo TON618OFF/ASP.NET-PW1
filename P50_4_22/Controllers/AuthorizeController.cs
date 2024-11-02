@@ -2,7 +2,7 @@
 
 namespace P50_4_22.Controllers
 {
-    public class Catalog : Controller
+    public class AuthorizeController : Controller
     {
         public IActionResult Index()
         {

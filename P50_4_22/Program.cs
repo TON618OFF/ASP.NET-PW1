@@ -1,7 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<P50_4_22.Models.BulkinKeysContext>(option =>
+option.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
 
 var app = builder.Build();
 
