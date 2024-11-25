@@ -8,7 +8,7 @@ namespace P50_4_22.Controllers
 {
     public class RegistrationController : Controller
     {
-        private readonly BulkinKeysContext _context;
+        public BulkinKeysContext _context;
 
         public RegistrationController(BulkinKeysContext context)
         {
@@ -25,17 +25,14 @@ namespace P50_4_22.Controllers
         public async Task<IActionResult> Register(string ClientLogin, string ClientPassword, string ClientSurname, string ClientName, 
             string ClientMiddleName, string Email, string PhoneNumber, int ClientAddress_ID)
         {
-            // Проверяем, существует ли пользователь с таким Email
             if (await _context.Clients.AnyAsync(u => u.ClientLogin == ClientLogin))
             {
                 ViewBag.ErrorMessage = "Пользователь с таким email уже существует";
                 return View("Index");
             }
 
-            // Хэшируем пароль
             string hashedPassword = HashPassword(ClientPassword);
 
-            // Создаем нового пользователя
             var client = new Client
             {
                 ClientLogin = ClientLogin,
@@ -49,11 +46,9 @@ namespace P50_4_22.Controllers
                 //RoleId = 1 убрать комментарий, когда будет готова таблица с ролями.
             };
 
-            // Сохраняем пользователя в базе данных
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            // Перенаправляем на главную страницу или страницу успешной регистрации
             return RedirectToAction("Index", "Home");
         }
 

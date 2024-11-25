@@ -24,7 +24,7 @@ namespace P50_4_22.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Authorization(string email, string password)
+        public async Task<IActionResult> Authorize(string email, string password)
         {
             string hashedPassword = HashPassword(password);
 
@@ -43,7 +43,7 @@ namespace P50_4_22.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal);
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.ErrorMessage = "Îøèáî÷êà";
+            ViewBag.ErrorMessage = "Ошибка авторизации!";
             return View();
         }
 
