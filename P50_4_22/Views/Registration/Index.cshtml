@@ -83,34 +83,48 @@
         height: 100vh; /* Занимает весь экран */
     }
 </style>
-
-<div class="center-wrapper">
-    <div class="auth-container">
-        <div>
-            <h2>Авторизация</h2>
+<div class="auth-container">
+    <h2>Регистрация</h2>
+    <form asp-action="Register" method="post">
+        <div class="form-group">
+            <label for="ClientLogin">Логин:</label>
+            <input type="text" id="ClientLogin" name="ClientLogin" placeholder="Введите логин" required />
         </div>
-        <div>
-            <form method="post">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input name="email" type="email" required id="email" placeholder="Введите email" />
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Пароль:</label>
-                    <input name="password" type="password" required id="passwords" placeholder="Введите пароль" />
-                </div>
-
-                <div class="form-group">
-                    <button type="submit">Авторизоваться</button>
-                </div>
-
-                @if (ViewBag.ErrorMessage != null)
-                {
-                    <div class="error-message">@ViewBag.ErrorMessage</div>
-                }
-
-            </form>
+        <div class="form-group">
+            <label for="ClientPassword">Пароль:</label>
+            <input type="password" id="ClientPassword" name="ClientPassword" placeholder="Введите ваш пароль" required />
         </div>
-    </div>
+        <div class="form-group">
+            <label for="ClientSurname">Фамилия:</label>
+            <input type="text" id="ClientSurname" name="ClientSurname" placeholder="Введите вашу фамилию" required />
+        </div>
+        <div class="form-group">
+            <label for="ClientName">Имя:</label>
+            <input type="text" id="ClientName" name="ClientName" placeholder="Введите ваше имя" required />
+        </div>
+        <div class="form-group">
+            <label for="ClientMiddleName">Отчество:</label>
+            <input type="text" id="ClientMiddleName" name="ClientMiddleName" placeholder="Введите ваше отчество" required />
+        </div>
+        <div class="form-group">
+            <label for="Email">Электронная почта:</label>
+            <input type="email" id="Email" name="Email" placeholder="Введите ваш Email" required />
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Номер телефона:</label>
+            <input type="text" id="PhoneNumber" name="PhoneNumber" placeholder="Введите ваш номер телефона" required />
+        </div>
+        <div class="form-group">
+            <label for="ClientAddress_ID">Адрес проживания:</label>
+            <input type="number" id="ClientAddress_ID" name="ClientAddress_ID" placeholder="Введите ваш адрес" required />  @* поставить позже text для указания адреса, а не id. *@
+        </div>
+        <div class="form-group">
+            <button type="submit">Зарегистрироваться</button>
+        </div>
+        <div class="form-group">
+            <span class="error-message">
+                <!-- Здесь можно динамически выводить ошибки -->
+            </span>
+        </div>
+    </form>
 </div>

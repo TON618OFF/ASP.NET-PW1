@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P50_4_22.Models;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace P50_4_22.Controllers
 {
