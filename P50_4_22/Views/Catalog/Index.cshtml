@@ -75,6 +75,39 @@
 
     <h1 style="margin-top: 50px;">Catalog</h1>
 
+    <div class="filter-sort-container" style="margin: 20px; text-align: center;">
+        <form asp-action="Index" method="get" style="display: inline-block; margin-right: 20px;">
+            <label for="category" style="margin-right: 10px;">Категория:</label>
+            <select id="category" name="category" class="form-control" style="display: inline-block; width: auto;">
+                <option value="">Все</option>
+                <option value="Экшен">Action</option>
+                <option value="Приключение">Adventure</option>
+                <option value="Инди">Indie</option>
+                <!-- Добавьте больше категорий -->
+            </select>
+
+            <label for="priceRange" style="margin: 0 10px;">Цена:</label>
+            <select id="priceRange" name="priceRange" class="form-control" style="display: inline-block; width: auto;">
+                <option value="">Все</option>
+                <option value="0-1000">0 - 1000 руб.</option>
+                <option value="1001-5000">1001 - 5000 руб.</option>
+                <option value="5001-10000">5001 - 10000 руб.</option>
+            </select>
+
+            <label for="sortOrder" style="margin-left: 10px; margin-right: 10px;">Сортировка:</label>
+            <select id="sortOrder" name="sortOrder" class="form-control" style="display: inline-block; width: auto;">
+                <option value="">Без сортировки</option>
+                <option value="priceAsc">По цене (возрастание)</option>
+                <option value="priceDesc">По цене (убывание)</option>
+                <option value="nameAsc">По названию (А-Я)</option>
+                <option value="nameDesc">По названию (Я-А)</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Применить</button>
+        </form>
+    </div>
+
+
     <div class="catalog">
         @foreach (var i in Model)
         {

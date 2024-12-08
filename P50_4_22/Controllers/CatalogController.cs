@@ -6,25 +6,52 @@ namespace P50_4_22.Controllers
 {
     public class CatalogController : Controller
     {
-        public BulkinKeysContext db;
+        public BulkinKeysContext _context;
 
         public CatalogController(BulkinKeysContext context)
         {
-            db = context;
+            _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string category, string priceRange, string sortOrder)
         {
-            //var product = db.Products.ToList();
-            //var user = db.Clients.Include(u => u.IdClient).ToList();
-            //var pu = new ProductUserVM
-            //{
-            //    Products = product,
-            //    Users = user
-            //};
-            return View(await db.Products.ToListAsync());
+            // Получение всех продуктов
+            var products = _context.Products.AsQueryable();
+
+            // Фильтрация по категории
+            if (!string.IsNullOrEmpty(category))
+            {
+                products = products.Where(p => p.Category.CategoryName.ToLower() == category.ToLower());
+            }
+
+            // Фильтрация по диапазону цен
+            if (!string.IsNullOrEmpty(priceRange))
+            {
+                var priceParts = priceRange.Split('-');
+                if (priceParts.Length == 2 &&
+                    decimal.TryParse(priceParts[0], out var minPrice) &&
+                    decimal.TryParse(priceParts[1], out var maxPrice))
+                {
+                    products = products.Where(p => p.ProductPrice >= minPrice && p.ProductPrice <= maxPrice);
+                }
+            }
+
+            // Сортировка
+            products = sortOrder switch
+            {
+                "priceAsc" => products.OrderBy(p => p.ProductPrice),
+                "priceDesc" => products.OrderByDescending(p => p.ProductPrice),
+                "nameAsc" => products.OrderBy(p => p.ProductName),
+                "nameDesc" => products.OrderByDescending(p => p.ProductName),
+                _ => products // Без сортировки
+            };
+
+            // Передача списка в представление
+            var model = products.ToList();
+            return View(model);
         }
-        
+
+
         public async Task<IActionResult> Create()
         {
             return View();
@@ -34,8 +61,8 @@ namespace P50_4_22.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
-            db.Products.Add(product);
-            await db.SaveChangesAsync();
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -43,7 +70,7 @@ namespace P50_4_22.Controllers
         {
             if (id != null)
             {
-                Product product = await db.Products.FirstOrDefaultAsync(Product => Product.IdProduct == id);
+                Product product = await _context.Products.FirstOrDefaultAsync(Product => Product.IdProduct == id);
                 if(product != null)
                 {
                     return View(product);
@@ -56,7 +83,7 @@ namespace P50_4_22.Controllers
         {
             if (id != null)
             {
-                Product product = await db.Products.FirstOrDefaultAsync(p => p.IdProduct == id);
+                Product product = await _context.Products.FirstOrDefaultAsync(p => p.IdProduct == id);
                 if (product != null)
                 {
                     return View(product);
@@ -69,8 +96,8 @@ namespace P50_4_22.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Product product)
         {
-            db.Products.Update(product);
-            await db.SaveChangesAsync();
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -81,7 +108,7 @@ namespace P50_4_22.Controllers
         {
             if (id != null)
             {
-                Product product = await db.Products.FirstOrDefaultAsync(p => p.IdProduct == id);
+                Product product = await _context.Products.FirstOrDefaultAsync(p => p.IdProduct == id);
                 if( product != null)
                 {
                     return View(product);
@@ -96,11 +123,11 @@ namespace P50_4_22.Controllers
         {
             if(id != null)
             {
-                Product product = await db.Products.FirstOrDefaultAsync(p => p.IdProduct == id);
+                Product product = await _context.Products.FirstOrDefaultAsync(p => p.IdProduct == id);
                 if(product != null)
                 {
-                    db.Products.Remove(product);
-                    await db.SaveChangesAsync();
+                    _context.Products.Remove(product);
+                    await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
             }

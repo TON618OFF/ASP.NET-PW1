@@ -21,7 +21,7 @@
                             <h5 class="card-title">@product.ProductName</h5>
                             <p class="card-text">@product.ProductDescription</p>
                             <p class="card-text"><strong>Цена:</strong> @product.ProductPrice руб.</p>
-                            <a href="@Url.Action("Details", "Search", new { id = product.IdProduct })" class="btn btn-primary">Подробнее</a>
+                            <a href="@Url.Action("Details", "Catalog", new { id = product.IdProduct })" class="btn btn-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>
