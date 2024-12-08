@@ -1,9 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model IEnumerable<P50_4_22.Models.Product>
+﻿@model IEnumerable<P50_4_22.Models.Product>
 @{
-
     ViewData["Title"] = "Каталог товаров";
 
     <style>
@@ -12,6 +8,29 @@
             font-family: monospace, sans-serif;
             font-weight: lighter;
         }
+
+        /* Форма фильтрации и сортировки */
+        .filter-sort-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .filter-sort-form {
+            display: flex; /* Используем Flexbox для выравнивания */
+            align-items: center; /* Центрирование по вертикали */
+            justify-content: center; /* Центрирование по горизонтали */
+            gap: 10px; /* Расстояние между элементами */
+            flex-wrap: wrap; /* Разрешаем перенос элементов при необходимости */
+        }
+
+            .filter-sort-form label {
+                margin-right: 10px;
+            }
+
+            .filter-sort-form select,
+            .filter-sort-form button {
+                margin: 5px 0;
+            }
 
         .catalog {
             display: grid;
@@ -73,12 +92,12 @@
             }
     </style>
 
-    <h1 style="margin-top: 50px;">Catalog</h1>
+    <h1 style="margin-top: 50px;">Каталог</h1>
 
-    <div class="filter-sort-container" style="margin: 20px; text-align: center;">
-        <form asp-action="Index" method="get" style="display: inline-block; margin-right: 20px;">
-            <label for="category" style="margin-right: 10px;">Категория:</label>
-            <select id="category" name="category" class="form-control" style="display: inline-block; width: auto;">
+    <div class="filter-sort-container">
+        <form class="filter-sort-form" asp-action="Index" method="get">
+            <label for="category">Категория:</label>
+            <select id="category" name="category" class="form-control" style="width: auto;">
                 <option value="">Все</option>
                 <option value="Экшен">Action</option>
                 <option value="Приключение">Adventure</option>
@@ -87,7 +106,7 @@
             </select>
 
             <label for="priceRange" style="margin: 0 10px;">Цена:</label>
-            <select id="priceRange" name="priceRange" class="form-control" style="display: inline-block; width: auto;">
+            <select id="priceRange" name="priceRange" class="form-control" style="width: auto;">
                 <option value="">Все</option>
                 <option value="0-1000">0 - 1000 руб.</option>
                 <option value="1001-5000">1001 - 5000 руб.</option>
@@ -95,7 +114,7 @@
             </select>
 
             <label for="sortOrder" style="margin-left: 10px; margin-right: 10px;">Сортировка:</label>
-            <select id="sortOrder" name="sortOrder" class="form-control" style="display: inline-block; width: auto;">
+            <select id="sortOrder" name="sortOrder" class="form-control" style="width: auto;">
                 <option value="">Без сортировки</option>
                 <option value="priceAsc">По цене (возрастание)</option>
                 <option value="priceDesc">По цене (убывание)</option>
@@ -107,22 +126,21 @@
         </form>
     </div>
 
-
     <div class="catalog">
         @foreach (var i in Model)
         {
-        <div class="game_card">
-            <a asp-action="Details" asp-asp-controller="Home" asp-route-id="@i.IdProduct">
-                <img src="~/images/@i.ProductImage" alt="@i.ProductImage">
-            </a>
-            <h4>@i.ProductName</h4>
-            <p>Цена: @i.ProductPrice руб.</p>
+            <div class="game_card">
+                <a asp-action="Details" asp-asp-controller="Home" asp-route-id="@i.IdProduct">
+                    <img src="~/images/@i.ProductImage" alt="@i.ProductImage">
+                </a>
+                <h4>@i.ProductName</h4>
+                <p>Цена: @i.ProductPrice руб.</p>
                 <form asp-action="AddToCart" asp-controller="Cart" method="post">
                     <input type="hidden" name="productId" value="@i.IdProduct" />
                     <input type="number" name="amount" value="1" min="1" max="@i.ProductAmount" />
                     <button type="submit">Добавить в корзину</button>
                 </form>
-        </div>
+            </div>
         }
     </div>
 }
