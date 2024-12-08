@@ -23,6 +23,8 @@ public partial class Client
 
     public int ClientAddressId { get; set; }
 
+    public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+
     public virtual ClientsAddress ClientAddress { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

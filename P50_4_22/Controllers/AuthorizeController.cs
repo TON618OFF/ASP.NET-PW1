@@ -17,8 +17,8 @@ namespace P50_4_22.Controllers
         {
             _context = context;
         }
-
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Authorize()
         {
             return View();
         }
@@ -33,8 +33,8 @@ namespace P50_4_22.Controllers
             {
                 var claim = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, user.ClientPassword),
-                    new Claim(ClaimTypes.Email, user.ClientLogin)
+                    new Claim(ClaimTypes.NameIdentifier, user.IdClient.ToString()),
+                    new Claim(ClaimTypes.Name, user.ClientLogin)
                 };
 
                 var claimIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);

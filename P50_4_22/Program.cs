@@ -11,10 +11,16 @@ builder.Services.AddDbContext<P50_4_22.Models.BulkinKeysContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Authorize"; // Путь к странице авторизации
+        options.LoginPath = "/Authorize/Index"; // Путь к странице авторизации
         options.LogoutPath = "/Home"; // Путь для выхода
         options.Cookie.Name = "YourAppCookie"; // Имя cookie
     });
+
+
+builder.Services.AddAuthorization(option =>
+{
+    option.AddPolicy("Customer", policy => policy.RequireRole("Customer"));
+});
 
 var app = builder.Build();
 

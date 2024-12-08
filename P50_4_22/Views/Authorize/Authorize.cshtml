@@ -90,14 +90,14 @@
             <h2>Авторизация</h2>
         </div>
         <div>
-            <form method="post" asp-action="Authorize">
+            <form method="post" asp-controller="Authorize" asp-action="Authorize">
                 <div class="form-group">
                     <label for="email">Логин:</label>
-                    <input name="email" type="text" id="email" placeholder="Введите логин" required />
+                    <input name="email" type="text"  placeholder="Введите логин" required />
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль:</label>
-                    <input name="password" type="password" id="password" placeholder="Введите пароль" required />
+                    <input name="password" type="password"  placeholder="Введите пароль" required />
                 </div>
                 <button type="submit">Авторизоваться</button>
             </form>

@@ -19,6 +19,8 @@ public partial class Product
 
     public int CategoryId { get; set; }
 
+    public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+
     public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<PositionOrder> PositionOrders { get; set; } = new List<PositionOrder>();
