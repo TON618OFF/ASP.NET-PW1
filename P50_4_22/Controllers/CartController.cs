@@ -7,7 +7,6 @@ namespace P50_4_22.Controllers
 {
     public class CartController : Controller
     {
-
         private readonly BulkinKeysContext _context;
 
         public CartController(BulkinKeysContext context)
@@ -15,31 +14,35 @@ namespace P50_4_22.Controllers
             _context = context;
         }
 
-		public IActionResult Index()
-		{
+        public IActionResult Index()
+        {
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-			if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int user))
-			{
-				return RedirectToAction("Index", "Authorize");
-			}
 
-			var userIntId = Convert.ToInt32(userId);
-			var cartItems = _context.CartItems
-				.Where(c => c.ClientId == userIntId)
-				.Include(c => c.Product)
-				.ToList();
+            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int user))
+            {
+                return RedirectToAction("Index", "Authorize");
+            }
 
-			return View(cartItems);
-		}
+            var cartItems = _context.CartItems
+                .Where(c => c.ClientId == user)
+                .Include(c => c.Product)
+                .ToList();
 
+            return View(cartItems);
+        }
 
-
-
-		[HttpPost]
+        [HttpPost]
         public async Task<IActionResult> AddToCart(int productId, int amount)
         {
             var userId = User.Identity?.Name;
             if (userId == null)
+            {
+                return RedirectToAction("Index", "Authorize");
+            }
+
+            // Предполагаем, что userId теперь строковый, так что нужно получить из Claims числовой идентификатор
+            var userIntId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIntId) || !int.TryParse(userIntId, out int user))
             {
                 return RedirectToAction("Index", "Authorize");
             }
@@ -55,9 +58,8 @@ namespace P50_4_22.Controllers
                 return BadRequest("Недостаточно товара на складе");
             }
 
-            int userIntId = Convert.ToInt32(userId);
             var cartItem = await _context.CartItems
-                .FirstOrDefaultAsync(c => c.ProductId == productId && c.ClientId == userIntId);
+                .FirstOrDefaultAsync(c => c.ProductId == productId && c.ClientId == user);
 
             if (cartItem == null)
             {
@@ -65,8 +67,8 @@ namespace P50_4_22.Controllers
                 {
                     ProductId = productId,
                     Quantity = amount,
-                    Price = product.ProductAmount * amount,
-                    ClientId = userIntId
+                    Price = product.ProductPrice * amount,
+                    ClientId = user
                 };
                 _context.CartItems.Add(cartItem);
             }
@@ -83,7 +85,7 @@ namespace P50_4_22.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction("Cart");
+            return RedirectToAction("Index", "Cart");
         }
 
         public IActionResult Cart()
@@ -95,12 +97,16 @@ namespace P50_4_22.Controllers
                 return RedirectToAction("Index", "Authorize");
             }
 
-            var userIntId = Convert.ToInt32(userId);
+            var userIntId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIntId) || !int.TryParse(userIntId, out int user))
+            {
+                return RedirectToAction("Index", "Authorize");
+            }
+
             var cartItems = _context.CartItems
-                .Where(c => c.ClientId == userIntId)
+                .Where(c => c.ClientId == user)
                 .Include(c => c.Product)
                 .ToList();
-
 
             return View(cartItems);
         }
@@ -116,9 +122,5 @@ namespace P50_4_22.Controllers
             }
             return RedirectToAction("Index");
         }
-
-
-
-
     }
 }

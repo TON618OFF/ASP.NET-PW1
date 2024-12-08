@@ -1,37 +1,108 @@
 ﻿@model IEnumerable<P50_4_22.Models.CartItem>
 
 <body>
-	<h1>Корзина</h1>
+    <h1 style="text-align: center; margin-top: 50px;">Корзина</h1>
 
-	@if (!Model.Any())
-	{
-		<p style="text-align: center;">Ваша корзина пуста.</p>
-	}
-	else
-	{
-		<table>
-			<thead>
-				<tr>
-					<th>Название</th>
-					<th>Количество</th>
-					<th>Цена</th>
-					<th>Общая стоимость</th>
-					<th>Действия</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var item in Model)
-				{
-					<tr>
-						<td>@item.Product.ProductName</td>
-						<td>@item.Product.ProductAmount шт.</td>
-						<td>@item.Product.ProductPrice руб.</td>
-						<td class="actions">
+    @if (!Model.Any())
+    {
+        <p style="text-align: center; font-size: 18px; color: #777;">Ваша корзина пуста.</p>
+    }
+    else
+    {
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Количество</th>
+                    <th>Цена</th>
+                    <th>Общая стоимость</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Product.ProductName</td>
+                        <td>@item.Quantity шт.</td>
+                        <td>@item.Product.ProductPrice руб.</td>
+                        <td>@(item.Quantity * item.Product.ProductPrice) руб.</td>
+                        <td>
+                            <form asp-action="RemoveFromCart" asp-controller="Cart" method="post">
+                                <input type="hidden" name="id" value="@item.IdCartItem" />
+                                <button type="submit" class="remove-btn">Удалить</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 
-						</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	}
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .cart-table {
+            width: 80%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .cart-table th, .cart-table td {
+                padding: 15px;
+                text-align: center;
+                font-size: 16px;
+            }
+
+            .cart-table th {
+                background-color: #28a745;
+                color: #fff;
+            }
+
+            .cart-table tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .cart-table tr:hover {
+                background-color: #e9e9e9;
+            }
+
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .remove-btn:hover {
+                background-color: #c82333;
+            }
+
+            .remove-btn:active {
+                background-color: #9e2c2f;
+            }
+
+        /* Добавление стилей для пустой корзины */
+        p {
+            font-size: 18px;
+            color: #777;
+        }
+
+    </style>
 </body>
