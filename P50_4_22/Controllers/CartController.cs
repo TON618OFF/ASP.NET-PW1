@@ -40,7 +40,6 @@ namespace P50_4_22.Controllers
                 return RedirectToAction("Index", "Authorize");
             }
 
-            // Предполагаем, что userId теперь строковый, так что нужно получить из Claims числовой идентификатор
             var userIntId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userIntId) || !int.TryParse(userIntId, out int user))
             {
@@ -122,5 +121,47 @@ namespace P50_4_22.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateQuantity([FromBody] UpdateQuantityModel model)
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int user))
+            {
+                return RedirectToAction("Index", "Authorize");
+            }
+
+            var cartItem = await _context.CartItems
+                .Include(ci => ci.Product)
+                .FirstOrDefaultAsync(ci => ci.IdCartItem == model.Id && ci.ClientId == user);
+
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+
+            if (model.Quantity < 1 || model.Quantity > cartItem.Product.ProductAmount)
+            {
+                return BadRequest("Недопустимое количество товара.");
+            }
+
+            cartItem.Quantity = model.Quantity;
+            cartItem.Price = cartItem.Quantity * cartItem.Product.ProductPrice;
+            await _context.SaveChangesAsync();
+
+            var itemTotal = cartItem.Price;
+            var total = _context.CartItems
+                .Where(c => c.ClientId == user)
+                .Sum(c => c.Price);
+
+            return Json(new { itemTotal, total });
+        }
+    }
+
+    public class UpdateQuantityModel
+    {
+        public int Id { get; set; }
+        public int Quantity { get; set; }
     }
 }

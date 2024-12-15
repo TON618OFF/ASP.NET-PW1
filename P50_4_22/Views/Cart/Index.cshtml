@@ -24,9 +24,13 @@
                 {
                     <tr>
                         <td>@item.Product.ProductName</td>
-                        <td>@item.Quantity шт.</td>
+                        <td>
+                            <input type="number" class="quantity-input" data-id="@item.IdCartItem"
+                                   value="@item.Quantity" min="1" style="width: 60px; text-align: center;" />
+                            шт.
+                        </td>
                         <td>@item.Product.ProductPrice руб.</td>
-                        <td>@(item.Quantity * item.Product.ProductPrice) руб.</td>
+                        <td class="total-price">@(item.Quantity * item.Product.ProductPrice) руб.</td>
                         <td>
                             <form asp-action="RemoveFromCart" asp-controller="Cart" method="post">
                                 <input type="hidden" name="id" value="@item.IdCartItem" />
@@ -35,9 +39,46 @@
                         </td>
                     </tr>
                 }
+                <tr>
+                    <td colspan="3" style="text-align: right; font-weight: bold;">Итого:</td>
+                    <td id="cart-total" style="font-weight: bold;">@Model.Sum(x => x.Quantity * x.Product.ProductPrice) руб.</td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
     }
+
+    <script>
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            input.addEventListener('change', async function () {
+                const id = this.getAttribute('data-id');
+                const quantity = this.value;
+
+                if (quantity < 1) {
+                    alert('Количество должно быть больше 0');
+                    this.value = 1;
+                    return;
+                }
+
+                const response = await fetch('/Cart/UpdateQuantity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id, quantity }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    document.querySelector(`#cart-total`).textContent = `${data.total} руб.`;
+                    this.closest('tr').querySelector('.total-price').textContent = `${data.itemTotal} руб.`;
+                } else {
+                    alert('Ошибка при обновлении количества товара.');
+                }
+            });
+        });
+    </script>
+
 
     <style>
         body {
