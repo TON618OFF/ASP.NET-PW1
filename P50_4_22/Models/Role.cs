@@ -8,4 +8,6 @@ public partial class Role
     public int IdRole { get; set; }
 
     public string RoleName { get; set; } = null!;
+
+    public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
 }

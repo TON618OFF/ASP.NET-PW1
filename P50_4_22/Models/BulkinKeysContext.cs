@@ -41,7 +41,7 @@ public partial class BulkinKeysContext : DbContext
     {
         modelBuilder.Entity<CartItem>(entity =>
         {
-            entity.HasKey(e => e.IdCartItem).HasName("PK__CartItem__B943DA22F3C3C230");
+            entity.HasKey(e => e.IdCartItem).HasName("PK__CartItem__B943DA2205D6912A");
 
             entity.Property(e => e.IdCartItem).HasColumnName("ID_CartItem");
             entity.Property(e => e.ClientId).HasColumnName("Client_ID");
@@ -52,19 +52,19 @@ public partial class BulkinKeysContext : DbContext
             entity.HasOne(d => d.Client).WithMany(p => p.CartItems)
                 .HasForeignKey(d => d.ClientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__CartItems__Clien__571DF1D5");
+                .HasConstraintName("FK__CartItems__Clien__6A30C649");
 
             entity.HasOne(d => d.Product).WithMany(p => p.CartItems)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__CartItems__Produ__5812160E");
+                .HasConstraintName("FK__CartItems__Produ__6B24EA82");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.IdCategory).HasName("PK__Categori__6DB3A68A43B5CD0B");
+            entity.HasKey(e => e.IdCategory).HasName("PK__Categori__6DB3A68A9BEF8185");
 
-            entity.HasIndex(e => e.CategoryName, "UQ__Categori__8517B2E026EDCC8E").IsUnique();
+            entity.HasIndex(e => e.CategoryName, "UQ__Categori__8517B2E099BE5AEA").IsUnique();
 
             entity.Property(e => e.IdCategory).HasColumnName("ID_Category");
             entity.Property(e => e.CategoryName)
@@ -74,13 +74,13 @@ public partial class BulkinKeysContext : DbContext
 
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.HasKey(e => e.IdClient).HasName("PK__Clients__B5AE4EC8E76E0A80");
+            entity.HasKey(e => e.IdClient).HasName("PK__Clients__B5AE4EC81FCD2D61");
 
-            entity.HasIndex(e => e.ClientLogin, "UQ__Clients__5BF1A31178929818").IsUnique();
+            entity.HasIndex(e => e.ClientLogin, "UQ__Clients__5BF1A3114D7A2F87").IsUnique();
 
-            entity.HasIndex(e => e.PhoneNumber, "UQ__Clients__85FB4E38394B57F1").IsUnique();
+            entity.HasIndex(e => e.PhoneNumber, "UQ__Clients__85FB4E38FBF631BF").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Clients__A9D105346BE91273").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Clients__A9D10534D8162A00").IsUnique();
 
             entity.Property(e => e.IdClient).HasColumnName("ID_Client");
             entity.Property(e => e.ClientAddressId).HasColumnName("ClientAddress_ID");
@@ -103,18 +103,24 @@ public partial class BulkinKeysContext : DbContext
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(12)
                 .IsUnicode(false);
+            entity.Property(e => e.RoleId).HasColumnName("Role_ID");
 
             entity.HasOne(d => d.ClientAddress).WithMany(p => p.Clients)
                 .HasForeignKey(d => d.ClientAddressId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Clients__ClientA__403A8C7D");
+                .HasConstraintName("FK__Clients__ClientA__52593CB8");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Clients)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Clients__Role_ID__534D60F1");
         });
 
         modelBuilder.Entity<ClientsAddress>(entity =>
         {
-            entity.HasKey(e => e.IdClientAddress).HasName("PK__ClientsA__FA731670B62D43B1");
+            entity.HasKey(e => e.IdClientAddress).HasName("PK__ClientsA__FA7316709CDED0A5");
 
-            entity.HasIndex(e => e.AddressLocation, "UQ__ClientsA__853D68BAD6235194").IsUnique();
+            entity.HasIndex(e => e.AddressLocation, "UQ__ClientsA__853D68BAF47F902B").IsUnique();
 
             entity.Property(e => e.IdClientAddress).HasColumnName("ID_ClientAddress");
             entity.Property(e => e.AddressCity)
@@ -133,9 +139,9 @@ public partial class BulkinKeysContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.IdOrder).HasName("PK__Orders__EC9FA9559CA32B11");
+            entity.HasKey(e => e.IdOrder).HasName("PK__Orders__EC9FA9551E839EFB");
 
-            entity.HasIndex(e => e.OrderNumber, "UQ__Orders__CAC5E74307BF7924").IsUnique();
+            entity.HasIndex(e => e.OrderNumber, "UQ__Orders__CAC5E743C63B4F24").IsUnique();
 
             entity.Property(e => e.IdOrder).HasColumnName("ID_Order");
             entity.Property(e => e.ClientId).HasColumnName("Client_ID");
@@ -151,21 +157,21 @@ public partial class BulkinKeysContext : DbContext
             entity.HasOne(d => d.Client).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ClientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__Client_I__4F7CD00D");
+                .HasConstraintName("FK__Orders__Client_I__628FA481");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.StatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__Status_I__4E88ABD4");
+                .HasConstraintName("FK__Orders__Status_I__619B8048");
         });
 
         modelBuilder.Entity<OrderStatus>(entity =>
         {
-            entity.HasKey(e => e.IdStatus).HasName("PK__OrderSta__5AC2A734F9427BA2");
+            entity.HasKey(e => e.IdStatus).HasName("PK__OrderSta__5AC2A734E13CEA42");
 
             entity.ToTable("OrderStatus");
 
-            entity.HasIndex(e => e.StatusName, "UQ__OrderSta__05E7698ACA830488").IsUnique();
+            entity.HasIndex(e => e.StatusName, "UQ__OrderSta__05E7698A0BED178B").IsUnique();
 
             entity.Property(e => e.IdStatus).HasColumnName("ID_Status");
             entity.Property(e => e.StatusName)
@@ -175,7 +181,7 @@ public partial class BulkinKeysContext : DbContext
 
         modelBuilder.Entity<PositionOrder>(entity =>
         {
-            entity.HasKey(e => e.IdPositionOrder).HasName("PK__Position__969ABB7C3DE7835A");
+            entity.HasKey(e => e.IdPositionOrder).HasName("PK__Position__969ABB7C14AB4F82");
 
             entity.Property(e => e.IdPositionOrder).HasColumnName("ID_PositionOrder");
             entity.Property(e => e.OrderId).HasColumnName("Order_ID");
@@ -185,21 +191,21 @@ public partial class BulkinKeysContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.PositionOrders)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PositionO__Order__52593CB8");
+                .HasConstraintName("FK__PositionO__Order__656C112C");
 
             entity.HasOne(d => d.Product).WithMany(p => p.PositionOrders)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PositionO__Produ__534D60F1");
+                .HasConstraintName("FK__PositionO__Produ__66603565");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.IdProduct).HasName("PK__Products__522DE496982CC8E4");
+            entity.HasKey(e => e.IdProduct).HasName("PK__Products__522DE496BC5AB642");
 
-            entity.HasIndex(e => e.ProductImage, "UQ__Products__465B783C331A3322").IsUnique();
+            entity.HasIndex(e => e.ProductImage, "UQ__Products__465B783CA6731C97").IsUnique();
 
-            entity.HasIndex(e => e.ProductName, "UQ__Products__DD5A978A9CD97F4F").IsUnique();
+            entity.HasIndex(e => e.ProductName, "UQ__Products__DD5A978A4C1406B4").IsUnique();
 
             entity.Property(e => e.IdProduct).HasColumnName("ID_Product");
             entity.Property(e => e.CategoryId).HasColumnName("Category_ID");
@@ -217,14 +223,14 @@ public partial class BulkinKeysContext : DbContext
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Products__Catego__47DBAE45");
+                .HasConstraintName("FK__Products__Catego__5AEE82B9");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.IdRole).HasName("PK__Roles__43DCD32D193CE16F");
+            entity.HasKey(e => e.IdRole).HasName("PK__Roles__43DCD32DCE828EAA");
 
-            entity.HasIndex(e => e.RoleName, "UQ__Roles__8A2B6160777C7779").IsUnique();
+            entity.HasIndex(e => e.RoleName, "UQ__Roles__8A2B6160B563C56E").IsUnique();
 
             entity.Property(e => e.IdRole).HasColumnName("ID_Role");
             entity.Property(e => e.RoleName)

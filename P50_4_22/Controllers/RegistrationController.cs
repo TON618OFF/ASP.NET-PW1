@@ -8,7 +8,7 @@ namespace P50_4_22.Controllers
 {
     public class RegistrationController : Controller
     {
-        public BulkinKeysContext _context;
+        private readonly BulkinKeysContext _context;
 
         public RegistrationController(BulkinKeysContext context)
         {
@@ -20,19 +20,43 @@ namespace P50_4_22.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> Register(string ClientLogin, string ClientPassword, string ClientSurname, string ClientName, 
-            string ClientMiddleName, string Email, string PhoneNumber, int ClientAddress_ID)
+        public async Task<IActionResult> Register(
+            string ClientLogin,
+            string ClientPassword,
+            string ClientSurname,
+            string ClientName,
+            string ClientMiddleName,
+            string Email,
+            string PhoneNumber,
+            int ClientAddress_ID)
         {
-            if (await _context.Clients.AnyAsync(u => u.ClientLogin == ClientLogin))
+            // Проверка на существование пользователя с таким же логином, email или номером телефона
+            if (await _context.Clients.AnyAsync(u =>
+                u.ClientLogin == ClientLogin ||
+                u.Email == Email ||
+                u.PhoneNumber == PhoneNumber))
             {
-                ViewBag.ErrorMessage = "Пользователь с таким email уже существует";
+                ViewBag.ErrorMessage = "Пользователь с таким логином, email или номером телефона уже существует.";
                 return View("Index");
             }
 
+            // Получение роли Customer
+            var customerRoleId = await _context.Roles
+                .Where(r => r.RoleName == "Customer")
+                .Select(r => r.IdRole)
+                .FirstOrDefaultAsync();
+
+            if (customerRoleId == 0)
+            {
+                ViewBag.ErrorMessage = "Роль 'Customer' не найдена в системе. Обратитесь к администратору.";
+                return View("Index");
+            }
+
+            // Хеширование пароля
             string hashedPassword = HashPassword(ClientPassword);
 
+            // Создание нового клиента
             var client = new Client
             {
                 ClientLogin = ClientLogin,
@@ -42,13 +66,15 @@ namespace P50_4_22.Controllers
                 ClientMiddleName = ClientMiddleName,
                 Email = Email,
                 PhoneNumber = PhoneNumber,
-                ClientAddressId = ClientAddress_ID
-                //RoleId = 1 убрать комментарий, когда будет готова таблица с ролями.
+                ClientAddressId = ClientAddress_ID,
+                RoleId = customerRoleId // Устанавливаем роль 'Customer'
             };
 
+            // Добавление клиента в базу данных
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
+            // Перенаправление на главную страницу
             return RedirectToAction("Index", "Home");
         }
 
