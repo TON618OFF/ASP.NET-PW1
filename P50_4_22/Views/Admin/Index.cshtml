@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">Панель администратора</h1>
+    <p class="text-center text-muted">Выберите таблицу для управления</p>
+    <div class="row mt-4">
+        <!-- Таблица Роли -->
+        <div class="col-md-4">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Ролями</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей ролей.</p>
+                    <a href="@Url.Action("Index", "Roles")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <!-- Таблица Адреса Клиентов -->
+        <div class="col-md-4">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Адресами Клиентов</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей адресов.</p>
+                    <a href="@Url.Action("Index", "ClientAddresses")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <!-- Таблица Клиенты -->
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Клиентами</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей клиентов.</p>
+                    <a href="@Url.Action("Index", "Clients")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <!-- Таблица Категории -->
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Категориями</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей категорий.</p>
+                    <a href="@Url.Action("Index", "Categories")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <!-- Таблица Продукты -->
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Продуктами</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей продуктов.</p>
+                    <a href="@Url.Action("Index", "Products")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <!-- Таблица Статус Заказа -->
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Статусом Заказов</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей статусов заказов.</p>
+                    <a href="@Url.Action("Index", "OrderStatuses")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <!-- Таблица Заказы -->
+        <div class="col-md-4">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Заказами</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей заказов.</p>
+                    <a href="@Url.Action("Index", "Orders")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <!-- Таблица Позиция Заказа -->
+        <div class="col-md-4">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Позициями Заказов</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей позиций заказов.</p>
+                    <a href="@Url.Action("Index", "OrderPositions")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <!-- Таблица Товары Корзины -->
+        <div class="col-md-4">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Управление Товарами Корзины</h5>
+                    <p class="card-text">Добавление, редактирование и удаление записей товаров корзины.</p>
+                    <a href="@Url.Action("Index", "CartItems")" class="btn btn-light">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

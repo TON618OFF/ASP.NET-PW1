@@ -31,21 +31,24 @@ namespace P50_4_22.Controllers
             var user = _context.Clients.FirstOrDefault(u => u.ClientLogin == email && u.ClientPassword == hashedPassword);
             if (user != null)
             {
-                var claim = new List<Claim>()
+                var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.IdClient.ToString()),
-                    new Claim(ClaimTypes.Name, user.ClientLogin)
+                    new Claim(ClaimTypes.Name, user.ClientLogin),
+                    new Claim(ClaimTypes.Role, user.RoleId.ToString()) 
                 };
 
-                var claimIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
-                var claimPrincipal = new ClaimsPrincipal(claimIdentity);
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
                 return RedirectToAction("Index", "Home");
             }
+
             ViewBag.ErrorMessage = "Ошибка авторизации!";
             return View();
         }
+
 
         private string HashPassword(string password)
         {

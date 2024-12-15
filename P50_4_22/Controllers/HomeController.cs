@@ -48,5 +48,18 @@ namespace P50_4_22.Controllers
 			return RedirectToAction("Index");
 		}
 
-	}
+        protected bool IsAdmin()
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int userIntId))
+            {
+                return false;
+            }
+
+            var user = db.Clients.FirstOrDefault(u => u.IdClient == userIntId);
+            return user?.RoleId == 2;
+        }
+
+    }
 }

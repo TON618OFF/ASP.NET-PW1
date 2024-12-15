@@ -113,7 +113,14 @@
                                 <a class="nav-link btn btn-primary text-white" asp-area="" asp-controller="Registration" asp-action="Index">Регистрация</a>
                             </li>
                         }
+                        @if (User.IsInRole("2"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-warning me-2 text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Debug</a>
+                            </li>
+                        }
                     </ul>
+
                 </div>
             </div>
         </nav>
