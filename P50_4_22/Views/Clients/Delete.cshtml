@@ -1,0 +1,27 @@
+﻿@model P50_4_22.Models.Client
+
+@{
+    ViewData["Title"] = "Удалить клиента";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <p class="text-center text-muted">Вы уверены, что хотите удалить этого клиента?</p>
+
+    <div>
+        <p><strong>Логин:</strong> @Model.ClientLogin</p>
+        <p><strong>Фамилия:</strong> @Model.ClientSurname</p>
+        <p><strong>Имя:</strong> @Model.ClientName</p>
+        <p><strong>Отчество:</strong> @Model.ClientMiddleName</p>
+        <p><strong>Электронная почта:</strong> @Model.Email</p>
+        <p><strong>Телефон:</strong> @Model.PhoneNumber</p>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" name="IdClient" value="@Model.IdClient" />
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+            <a href="@Url.Action("Index", "Clients")" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>

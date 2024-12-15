@@ -1,0 +1,84 @@
+﻿@model List<P50_4_22.Models.Client>
+
+@{
+    ViewData["Title"] = "Список клиентов";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <p class="text-center text-muted">Управление клиентами</p>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Логин</th>
+                    <th>Пароль</th>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Почта</th>
+                    <th>Телефон</th>
+                    <th>Адрес</th>
+                    <th>Роль</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var client in Model)
+                {
+                    <tr>
+                        <td>@client.ClientLogin</td>
+                        <td>@client.ClientPassword</td>
+                        <td>@client.ClientSurname</td>
+                        <td>@client.ClientName</td>
+                        <td>@client.ClientMiddleName</td>
+                        <td>@client.Email</td>
+                        <td>@client.PhoneNumber</td>
+                        <td>@client.ClientAddress?.AddressLocation</td>
+                        <td>@client.Role?.RoleName</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Clients", new { id = client.IdClient })" class="btn btn-warning btn-sm">Редактировать</a>
+                            <a href="@Url.Action("Delete", "Clients", new { id = client.IdClient })" class="btn btn-danger btn-sm">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="@Url.Action("Create", "Clients")" class="btn btn-success">Добавить нового клиента</a>
+    </div>
+</div>
+
+
+<style>
+    /* Увеличиваем ширину таблицы */
+.table-responsive {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Увеличиваем ширину столбцов */
+th, td {
+    padding: 15px; /* Увеличиваем отступы внутри ячеек */
+}
+
+table th {
+    text-align: center; /* Центрируем заголовки */
+}
+
+table td {
+    text-align: center; /* Центрируем данные */
+}
+
+/* Задаем минимальную ширину для столбца пароля, чтобы он не выглядел слишком узким */
+td:nth-child(2), th:nth-child(2) {
+    min-width: 150px; /* Минимальная ширина для столбца пароля */
+}
+
+table {
+    width: 100%; /* Делаем таблицу широкой */
+}
+</style>

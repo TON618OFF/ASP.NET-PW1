@@ -1,0 +1,88 @@
+﻿@model P50_4_22.Models.Client
+
+@{
+    ViewData["Title"] = "Создать нового клиента";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <p class="text-center text-muted">Введите данные клиента</p>
+
+    <form asp-action="Create" method="post">
+        <div class="row mb-3">
+            <label for="ClientLogin" class="col-sm-2 col-form-label">Логин</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ClientLogin" name="ClientLogin" required />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="ClientPassword" class="col-sm-2 col-form-label">Пароль</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="ClientPassword" name="ClientPassword" required />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="ClientSurname" class="col-sm-2 col-form-label">Фамилия</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ClientSurname" name="ClientSurname" required />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="ClientName" class="col-sm-2 col-form-label">Имя</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ClientName" name="ClientName" required />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="ClientMiddleName" class="col-sm-2 col-form-label">Отчество</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ClientMiddleName" name="ClientMiddleName" required />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Email" class="col-sm-2 col-form-label">Электронная почта</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="Email" name="Email" required />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="PhoneNumber" class="col-sm-2 col-form-label">Телефон</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" required />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="ClientAddressId" class="col-sm-2 col-form-label">Адрес</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="ClientAddressId" name="ClientAddressId">
+                    <!-- Добавьте список адресов -->
+                    <option value="1">Адрес 1</option>
+                    <option value="2">Адрес 2</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="RoleId" class="col-sm-2 col-form-label">Роль</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="RoleId" name="RoleId">
+                    <!-- Добавьте список ролей -->
+                    <option value="1">Роль 1</option>
+                    <option value="2">Роль 2</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-success">Создать клиента</button>
+            <a href="@Url.Action("Index", "Clients")" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>

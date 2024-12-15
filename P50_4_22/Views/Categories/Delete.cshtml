@@ -1,0 +1,21 @@
+﻿@model P50_4_22.Models.Category
+
+@{
+    ViewData["Title"] = "Удалить категорию";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-danger">@ViewData["Title"]</h2>
+    <p class="text-center">Вы уверены, что хотите удалить категорию <strong>@Model.CategoryName</strong>?</p>
+
+    <div class="text-center mt-3">
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="IdCategory" />
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-danger btn-lg me-3">Удалить</button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary btn-lg">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
