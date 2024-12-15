@@ -1,0 +1,125 @@
+﻿@model P50_4_22.Models.ClientsAddress
+
+@{
+    ViewData["Title"] = "Редактировать адрес клиента";
+}
+
+<div class="edit-address-container container">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="card edit-address-card">
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="IdClientAddress" />
+
+                <div class="form-group">
+                    <label asp-for="AddressLocation" class="form-label">Местоположение</label>
+                    <input asp-for="AddressLocation" class="form-control" placeholder="Введите местоположение" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AddressCity" class="form-label">Город</label>
+                    <input asp-for="AddressCity" class="form-control" placeholder="Введите город" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AddressPostalCode" class="form-label">Почтовый код</label>
+                    <input asp-for="AddressPostalCode" class="form-control" placeholder="Введите почтовый код" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AddressCountry" class="form-label">Страна</label>
+                    <input asp-for="AddressCountry" class="form-control" placeholder="Введите страну" />
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Общие стили */
+    .edit-address-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+        .edit-address-container h2 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+    .edit-address-card {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+        .edit-address-card .form-group {
+            margin-bottom: 20px;
+        }
+
+        .edit-address-card .form-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .edit-address-card .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .edit-address-card .form-control:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            }
+
+        .edit-address-card .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .edit-address-card .btn {
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 12px 24px;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-address-card .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+            .edit-address-card .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .edit-address-card .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+        }
+
+            .edit-address-card .btn-secondary:hover {
+                background-color: #5a6268;
+            }
+</style>

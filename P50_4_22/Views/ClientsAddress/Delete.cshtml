@@ -1,0 +1,96 @@
+﻿@model P50_4_22.Models.ClientsAddress
+
+@{
+    ViewData["Title"] = "Удалить адрес клиента";
+}
+
+<div class="delete-client-address-page container">
+    <h2 class="text-center">@ViewData["Title"]</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="text-center mb-4">Вы уверены, что хотите удалить этот адрес?</h3>
+
+            <div class="address-details mb-4">
+                <p><strong>Местоположение:</strong> @Model.AddressLocation</p>
+                <p><strong>Город:</strong> @Model.AddressCity</p>
+                <p><strong>Почтовый код:</strong> @Model.AddressPostalCode</p>
+                <p><strong>Страна:</strong> @Model.AddressCountry</p>
+            </div>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="IdClientAddress" />
+
+                <div class="form-actions d-flex justify-content-between">
+                    <button type="submit" class="btn btn-danger w-100">Удалить</button>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary w-100">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Локальные стили для страницы "Удалить адрес клиента" */
+    .delete-client-address-page h2 {
+        color: #333;
+        font-size: 26px;
+        font-weight: 600;
+        margin-top: 30px;
+    }
+
+    .delete-client-address-page .card {
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .delete-client-address-page .card-body {
+        padding: 40px;
+    }
+
+    .delete-client-address-page .address-details p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .delete-client-address-page .address-details strong {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .delete-client-address-page .form-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .delete-client-address-page .btn {
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .delete-client-address-page .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+    }
+
+    .delete-client-address-page .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .delete-client-address-page .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+    }
+
+    .delete-client-address-page .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+</style>

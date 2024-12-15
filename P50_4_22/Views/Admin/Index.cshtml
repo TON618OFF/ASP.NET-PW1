@@ -1,13 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Admin Panel";
+    ViewData["Title"] = "Панель администратора";
 }
 
 <div class="container mt-4">
     <h1 class="text-center">Панель администратора</h1>
-    <p class="text-center text-muted">Выберите таблицу для управления</p>
+    <p class="text-center text-muted mb-4">Выберите таблицу для управления</p> <!-- Added bottom margin here -->
+
     <div class="row mt-4">
         <!-- Таблица Роли -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-secondary mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Ролями</h5>
@@ -17,17 +18,17 @@
             </div>
         </div>
         <!-- Таблица Адреса Клиентов -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-dark mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Адресами Клиентов</h5>
                     <p class="card-text">Добавление, редактирование и удаление записей адресов.</p>
-                    <a href="@Url.Action("Index", "ClientAddresses")" class="btn btn-light">Перейти</a>
+                    <a href="@Url.Action("Index", "ClientsAddress")" class="btn btn-light">Перейти</a>
                 </div>
             </div>
         </div>
         <!-- Таблица Клиенты -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-primary mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Клиентами</h5>
@@ -37,7 +38,7 @@
             </div>
         </div>
         <!-- Таблица Категории -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-warning mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Категориями</h5>
@@ -47,7 +48,7 @@
             </div>
         </div>
         <!-- Таблица Продукты -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-success mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Продуктами</h5>
@@ -57,7 +58,7 @@
             </div>
         </div>
         <!-- Таблица Статус Заказа -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-info mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Статусом Заказов</h5>
@@ -67,7 +68,7 @@
             </div>
         </div>
         <!-- Таблица Заказы -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-danger mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Заказами</h5>
@@ -77,7 +78,7 @@
             </div>
         </div>
         <!-- Таблица Позиция Заказа -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-secondary mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Позициями Заказов</h5>
@@ -87,7 +88,7 @@
             </div>
         </div>
         <!-- Таблица Товары Корзины -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="card text-white bg-dark mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Управление Товарами Корзины</h5>
@@ -98,3 +99,36 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* Дополнительные стили для улучшения отступов */
+    .container {
+        max-width: 1200px;
+    }
+
+    .mb-4 {
+        margin-bottom: 20px; /* Added spacing between the cards */
+    }
+
+    .card-body {
+        padding: 20px; /* Adjusted padding for card content */
+    }
+
+    .card-title {
+        margin-bottom: 15px; /* Space between title and text */
+    }
+
+    .card-text {
+        margin-bottom: 20px; /* Space between text and button */
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        color: #495057;
+        border-radius: 5px;
+    }
+
+        .btn-light:hover {
+            background-color: #e2e6ea;
+        }
+</style>

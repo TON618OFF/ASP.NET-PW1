@@ -1,0 +1,101 @@
+﻿@model P50_4_22.Models.ClientsAddress
+
+@{
+    ViewData["Title"] = "Добавить адрес клиента";
+}
+
+<div class="add-client-address-page">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="AddressLocation" class="form-label">Местоположение</label>
+            <input asp-for="AddressLocation" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="AddressCity" class="form-label">Город</label>
+            <input asp-for="AddressCity" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="AddressPostalCode" class="form-label">Почтовый код</label>
+            <input asp-for="AddressPostalCode" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="AddressCountry" class="form-label">Страна</label>
+            <input asp-for="AddressCountry" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+
+<style>
+    /* Локальные стили для страницы "Добавить адрес клиента" */
+    .add-client-address-page {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .add-client-address-page h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .add-client-address-page .form-group {
+            margin-bottom: 20px;
+        }
+
+        .add-client-address-page .form-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .add-client-address-page .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+            .add-client-address-page .form-control:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+            }
+
+        .add-client-address-page .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .add-client-address-page .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+            .add-client-address-page .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .add-client-address-page .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+            .add-client-address-page .btn-secondary:hover {
+                background-color: #5a6268;
+            }
+</style>
