@@ -3,23 +3,25 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<P50_4_22.Models.BulkinKeysContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Authorize/Index"; // Путь к странице авторизации
-        options.LogoutPath = "/Home"; // Путь для выхода
-        options.Cookie.Name = "YourAppCookie"; // Имя cookie
+        options.LoginPath = "/Authorize/Index";
+        options.LogoutPath = "/Authorize/Logout"; 
+        options.Cookie.Name = "YourAppCookie"; 
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
     });
 
 
-builder.Services.AddAuthorization(option =>
+builder.Services.AddAuthorization(options =>
 {
-    option.AddPolicy("Customer", policy => policy.RequireRole("Customer"));
+    options.AddPolicy("Customer", policy => policy.RequireRole("Customer")); 
 });
 
 var app = builder.Build();
@@ -34,8 +36,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseAuthentication();
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllerRoute(

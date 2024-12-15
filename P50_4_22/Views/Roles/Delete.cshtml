@@ -1,0 +1,88 @@
+﻿@model P50_4_22.Models.Role
+
+@{
+    ViewData["Title"] = "Удалить роль";
+}
+
+<style>
+    /* Уникальный стиль для страницы удаления роли */
+    .delete-role-page {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: white;
+        padding: 20px 0;
+    }
+
+        .delete-role-page .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .delete-role-page h2 {
+            color: #444;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .delete-role-page p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .delete-role-page .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .delete-role-page .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100px;
+        }
+
+        .delete-role-page .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+            .delete-role-page .btn-danger:hover {
+                background-color: #c82333;
+                transform: scale(1.03);
+            }
+
+        .delete-role-page .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+            .delete-role-page .btn-secondary:hover {
+                background-color: #5a6268;
+                transform: scale(1.03);
+            }
+</style>
+
+<div class="delete-role-page">
+    <div class="form-container">
+        <h2>@ViewData["Title"]</h2>
+        <p>Вы уверены, что хотите удалить роль "<strong>@Model.RoleName</strong>"?</p>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="IdRole" />
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+                <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>

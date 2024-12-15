@@ -1,0 +1,124 @@
+﻿@model P50_4_22.Models.Role
+
+@{
+    ViewData["Title"] = "Добавить роль";
+}
+
+<style>
+    /* Уникальный стиль для страницы */
+    .add-role-page {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: white;
+        padding: 20px 0;
+    }
+
+        .add-role-page .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .add-role-page h2 {
+            text-align: center;
+            color: #444;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .add-role-page .form-group {
+            margin-bottom: 18px;
+        }
+
+        .add-role-page .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .add-role-page .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+            .add-role-page .form-control:focus {
+                border-color: #0056b3;
+                box-shadow: 0 0 6px rgba(0, 123, 255, 0.25);
+                outline: none;
+            }
+
+        .add-role-page .text-danger {
+            font-size: 12px;
+            color: #d9534f;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .add-role-page .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .add-role-page .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .add-role-page .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+            .add-role-page .btn-primary:hover {
+                background-color: #0056b3;
+                transform: scale(1.03);
+            }
+
+        .add-role-page .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+            .add-role-page .btn-secondary:hover {
+                background-color: #5a6268;
+                transform: scale(1.03);
+            }
+</style>
+
+<div class="add-role-page">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="form-container">
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="RoleName" class="form-label">Название роли</label>
+                <input asp-for="RoleName" class="form-control" placeholder="Введите название роли" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Добавить</button>
+                <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Включение клиентской валидации -->
+    <partial name="_ValidationScriptsPartial" />
+}
