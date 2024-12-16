@@ -1,0 +1,52 @@
+﻿@model P50_4_22.Models.Product
+
+@{
+    ViewData["Title"] = "Редактирование продукта";
+}
+
+<h2>Редактирование продукта</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="IdProduct" />
+
+    <div class="form-group">
+        <label asp-for="ProductName" class="control-label">Название</label>
+        <input asp-for="ProductName" class="form-control" />
+        <span asp-validation-for="ProductName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductImage" class="control-label">Изображение (example.png)</label>
+        <input asp-for="ProductImage" class="form-control" />
+        <span asp-validation-for="ProductImage" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductPrice" class="control-label">Цена</label>
+        <input asp-for="ProductPrice" class="form-control" />
+        <span asp-validation-for="ProductPrice" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductDescription" class="control-label">Описание</label>
+        <textarea asp-for="ProductDescription" class="form-control"></textarea>
+        <span asp-validation-for="ProductDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductAmount" class="control-label">Кол-во</label>
+        <input asp-for="ProductAmount" class="form-control" />
+        <span asp-validation-for="ProductAmount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryId" class="control-label">Категория</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a asp-action="Index" class="btn btn-secondary">Отменить</a>
+    </div>
+</form>

@@ -1,0 +1,42 @@
+﻿@model P50_4_22.Models.Order
+
+@{
+    ViewData["Title"] = "Редактирование Заказа";
+}
+
+<h1>Редактирование Заказа</h1>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="OrderNumber" class="control-label">Номер Заказа</label>
+        <input asp-for="OrderNumber" class="form-control" />
+        <span asp-validation-for="OrderNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderDate" class="control-label">Дата Заказа</label>
+        <input asp-for="OrderDate" class="form-control" />
+        <span asp-validation-for="OrderDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderTotalSum" class="control-label">Общая Сумма Заказа</label>
+        <input asp-for="OrderTotalSum" class="form-control" />
+        <span asp-validation-for="OrderTotalSum" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ClientId" class="control-label">Клиент</label>
+        <select asp-for="ClientId" class="form-control" asp-items="@(ViewData["ClientId"] as SelectList)"></select>
+        <span asp-validation-for="ClientId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StatusId" class="control-label">Статус Заказа</label>
+        <select asp-for="StatusId" class="form-control" asp-items="@(ViewData["StatusId"] as SelectList)"></select>
+        <span asp-validation-for="StatusId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Отмена</a>
+</form>

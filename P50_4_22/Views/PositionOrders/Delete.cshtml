@@ -1,0 +1,32 @@
+﻿@model P50_4_22.Models.PositionOrder
+
+@{
+    ViewData["Title"] = "Удалить позицию заказа";
+}
+
+<h1>Удалить позицию заказа</h1>
+
+<h3>Вы уверены, что хотите удалить эту позицию заказа?</h3>
+
+<div>
+    <h4>Детали позиции заказа</h4>
+    <dl class="dl-horizontal">
+        <dt>Номер заказа</dt>
+        <dd>@Model.Order.OrderNumber</dd>
+
+        <dt>Название продукта</dt>
+        <dd>@Model.Product.ProductName</dd>
+
+        <dt>Количество позиции</dt>
+        <dd>@Model.PositionOrderCount</dd>
+
+        <dt>Цена позиции</dt>
+        <dd>@Model.PositionOrderPrice</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="IdPositionOrder" />
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Отмена</a>
+</form>

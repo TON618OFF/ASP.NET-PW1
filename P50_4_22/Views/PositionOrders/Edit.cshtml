@@ -1,0 +1,42 @@
+﻿@model P50_4_22.Models.PositionOrder
+
+@{
+    ViewData["Title"] = "Редактировать позицию заказа";
+}
+
+<h1>Редактировать позицию заказа</h1>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="IdPositionOrder" class="control-label"></label>
+        <input asp-for="IdPositionOrder" class="form-control" readonly />
+        <span asp-validation-for="IdPositionOrder" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PositionOrderCount" class="control-label"></label>
+        <input asp-for="PositionOrderCount" class="form-control" />
+        <span asp-validation-for="PositionOrderCount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PositionOrderPrice" class="control-label"></label>
+        <input asp-for="PositionOrderPrice" class="form-control" />
+        <span asp-validation-for="PositionOrderPrice" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderId" class="control-label"></label>
+        <select asp-for="OrderId" class="form-control" asp-items="@(ViewData["OrderId"] as SelectList)"></select>
+        <span asp-validation-for="OrderId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductId" class="control-label"></label>
+        <select asp-for="ProductId" class="form-control" asp-items="@(ViewData["ProductId"] as SelectList)"></select>
+        <span asp-validation-for="ProductId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Вернуться к списку</a>
+</form>

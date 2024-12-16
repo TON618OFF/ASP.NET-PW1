@@ -1,0 +1,27 @@
+﻿@model P50_4_22.Models.Product
+
+@{
+    ViewData["Title"] = "Удаление продукта";
+}
+
+<h2>Удаление продукта</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">@Model.ProductName</h4>
+        <p class="card-text"><strong>Цена:</strong> @Model.ProductPrice.ToString("C")</p>
+        <p class="card-text"><strong>Описание:</strong> @Model.ProductDescription</p>
+        <p class="card-text"><strong>Кол-во:</strong> @Model.ProductAmount</p>
+        <p class="card-text"><strong>Категория:</strong> @Model.Category.CategoryName</p>
+        <p class="card-text"><strong>Изображение:</strong></p>
+        <img src="~/images/@Model.ProductImage" alt="@Model.ProductName" style="width: 200px; height: auto;" />
+    </div>
+</div>
+
+<div class="mt-3">
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="IdProduct" />
+        <button type="submit" class="btn btn-danger">Удалить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отменить</a>
+    </form>
+</div>

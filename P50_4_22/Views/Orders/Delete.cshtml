@@ -1,0 +1,29 @@
+﻿@model P50_4_22.Models.Order
+
+@{
+    ViewData["Title"] = "Удаление заказа";
+}
+
+<h1>Вы уверены, что хотите удалить этот заказ?</h1>
+
+<div>
+    <strong>Номер Заказа:</strong> @Model.OrderNumber
+</div>
+<div>
+    <strong>Дата Заказа:</strong> @Model.OrderDate
+</div>
+<div>
+    <strong>Общая Сумма Заказа:</strong> @Model.OrderTotalSum
+</div>
+<div>
+    <strong>Клиент:</strong> @Model.Client.ClientName
+</div>
+<div>
+    <strong>Статус:</strong> @Model.Status.StatusName
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="IdOrder" />
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Отмена</a>
+</form>

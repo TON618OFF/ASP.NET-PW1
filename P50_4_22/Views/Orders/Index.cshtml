@@ -1,0 +1,40 @@
+﻿@model IEnumerable<P50_4_22.Models.Order>
+
+@{
+    ViewData["Title"] = "Список Заказов";
+}
+
+<h1>Заказы</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Создания Нового Заказа</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Номер Заказа</th>
+            <th>Дата Заказа</th>
+            <th>Общая Сумма</th>
+            <th>Клиент</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderNumber</td>
+                <td>@order.OrderDate</td>
+                <td>@order.OrderTotalSum</td>
+                <td>@order.Client.ClientName</td>
+                <td>@order.Status.StatusName</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = order.IdOrder })" class="btn btn-warning">Редактировать</a>
+                    <a href="@Url.Action("Delete", new { id = order.IdOrder })" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

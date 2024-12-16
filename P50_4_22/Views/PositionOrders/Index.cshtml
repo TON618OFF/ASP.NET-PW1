@@ -1,0 +1,38 @@
+﻿@model IEnumerable<P50_4_22.Models.PositionOrder>
+
+@{
+    ViewData["Title"] = "Позиции заказов";
+}
+
+<h1>Позиции заказов</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Создать новую позицию заказа</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Номер заказа</th>
+            <th>Название продукта</th>
+            <th>Количество позиции</th>
+            <th>Цена позиции</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Order.OrderNumber</td>
+                <td>@item.Product.ProductName</td>
+                <td>@item.PositionOrderCount</td>
+                <td>@item.PositionOrderPrice</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.IdPositionOrder })" class="btn btn-warning">Редактировать</a>
+                    <a href="@Url.Action("Delete", new { id = item.IdPositionOrder })" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

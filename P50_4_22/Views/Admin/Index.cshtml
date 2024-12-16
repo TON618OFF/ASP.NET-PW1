@@ -4,7 +4,7 @@
 
 <div class="container mt-4">
     <h1 class="text-center">Панель администратора</h1>
-    <p class="text-center text-muted mb-4">Выберите таблицу для управления</p> <!-- Added bottom margin here -->
+    <p class="text-center text-muted mb-4">Выберите таблицу для управления</p> 
 
     <div class="row mt-4">
         <!-- Таблица Роли -->
@@ -83,7 +83,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Управление Позициями Заказов</h5>
                     <p class="card-text">Добавление, редактирование и удаление записей позиций заказов.</p>
-                    <a href="@Url.Action("Index", "OrderPositions")" class="btn btn-light">Перейти</a>
+                    <a href="@Url.Action("Index", "PositionOrders")" class="btn btn-light">Перейти</a>
                 </div>
             </div>
         </div>
@@ -101,25 +101,24 @@
 </div>
 
 <style>
-    /* Дополнительные стили для улучшения отступов */
     .container {
         max-width: 1200px;
     }
 
     .mb-4 {
-        margin-bottom: 20px; /* Added spacing between the cards */
+        margin-bottom: 20px;
     }
 
     .card-body {
-        padding: 20px; /* Adjusted padding for card content */
+        padding: 20px; 
     }
 
     .card-title {
-        margin-bottom: 15px; /* Space between title and text */
+        margin-bottom: 15px;
     }
 
     .card-text {
-        margin-bottom: 20px; /* Space between text and button */
+        margin-bottom: 20px; 
     }
 
     .btn-light {

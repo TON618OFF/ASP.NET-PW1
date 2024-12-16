@@ -1,0 +1,20 @@
+﻿@model P50_4_22.Models.CartItem
+
+@{
+    ViewData["Title"] = "Удалить элемент корзины";
+}
+
+<h1>Удалить элемент корзины</h1>
+
+<h3>Вы уверены, что хотите удалить элемент корзины?</h3>
+<div>
+    <h4>Продукт: @Model.Product.ProductName</h4>
+    <p>Количество: @Model.Quantity</p>
+    <p>Цена: @Model.Price</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="IdCartItem" />
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Отмена</a>
+</form>

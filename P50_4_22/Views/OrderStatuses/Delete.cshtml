@@ -1,0 +1,17 @@
+﻿@model P50_4_22.Models.OrderStatus
+
+@{
+    ViewData["Title"] = "Удалить статус";
+}
+
+<h2>Удалить статус</h2>
+
+<p>Вы уверены, что хотите удалить статус "<strong>@Model.StatusName</strong>"?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="IdStatus" />
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">Удалить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+    </div>
+</form>
