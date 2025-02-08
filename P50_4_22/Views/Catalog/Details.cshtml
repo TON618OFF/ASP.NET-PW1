@@ -18,9 +18,8 @@
         </div>
     </div>
 
-    <!-- Вставка компонента для расчёта среднего рейтинга -->
-    @await Component.InvokeAsync("AverageRatingViewComponent", new { productId = Model.IdProduct })
-
+@*     @await Component.InvokeAsync("AverageRatingViewComponent", new { productId = Model.IdProduct })
+ *@
     <partial name="_ReviewsList" model="Model.Reviews" />
     @await Html.PartialAsync("_AddReviews", new P50_4_22.Models.Review { ProductId = Model.IdProduct })
 </div>
