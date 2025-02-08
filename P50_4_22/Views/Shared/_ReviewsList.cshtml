@@ -1,0 +1,27 @@
+﻿@model List<P50_4_22.Models.Review>
+
+@if (Model != null && Model.Any())
+{
+    <h3>Отзывы</h3>
+    <ul class="list-group">
+        @foreach (var review in Model)
+        {
+            <li class="list-group-item">
+                <strong>Ник:</strong> @review.ClientName?.ClientLogin <br />
+                <strong>Оценка:</strong>
+                @for (int i = 0; i < review.ReviewRating; i++)
+                {
+                    <span>⭐</span>
+                }
+                <br />
+                <strong>Комментарий:</strong> @review.ReviewComment
+                <br />
+                <small><i>Дата: @review.ReviewCreatedDate.ToString("dd.MM.yyyy HH:mm")</i></small>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Отзывов пока нет.</p>
+}

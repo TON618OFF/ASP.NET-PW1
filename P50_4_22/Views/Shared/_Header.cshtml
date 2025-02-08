@@ -1,0 +1,117 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bulkin Keys</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Политика Конфиденциальности</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Catalog" asp-action="Index">Каталог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Support" asp-action="Index">Тех. Поддержка</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Reviews" asp-action="Index">Отзывы</a>
+                    </li>
+                </ul>
+                <!-- Добавлены кнопки авторизации и регистрации справа -->
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary me-2" asp-area="" asp-controller="Search" asp-action="Index">Поиск товаров</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary me-2" asp-area="" asp-controller="Cart" asp-action="Index">Корзина</a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span class="navbar-text">
+                            <p>Клиент - @User.Identity.Name</p>
+                        </span>
+                        <form asp-controller="Authorize" asp-action="Logout" method="post" class="d-inline">
+                            <button type="submit" class="nav-link btn btn-outline-primary me-2">Выйти</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-primary me-2" asp-area="" asp-controller="Authorize" asp-action="Authorize">Авторизация</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary text-white" asp-area="" asp-controller="Registration" asp-action="Index">Регистрация</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("2"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-warning me-2 text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Debug</a>
+                        </li>
+                    }
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<style>
+    /* Стиль для шапки */
+    .navbar {
+        padding: 10px 0;
+    }
+
+    /* Настройка для выравнивания элементов по вертикали */
+    .navbar-nav .nav-item {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Выравнивание кнопок в правой части */
+    .navbar-nav.navbar-right {
+        margin-left: auto;
+    }
+
+        /* Для кнопок в правой части */
+        .navbar-nav.navbar-right .nav-item {
+            margin-left: 10px;
+        }
+
+    /* Заголовок пользователя (логин) */
+    .navbar-text {
+        color: black;
+        font-weight: bold;
+        margin-right: 15px;
+        padding: 0; /* Убираем padding */
+        display: flex; /* Используем flexbox */
+        align-items: center; /* Выравнивание по вертикали */
+    }
+
+        .navbar-text p {
+            margin: 0; /* Убираем margin у <p> */
+            padding: 0; /* Убираем padding у <p> */
+            display: inline-block; /* Убираем лишний отступ */
+        }
+
+
+    /* Стиль для кнопок */
+    .btn-outline-primary, .btn-primary, .btn-outline-primary.me-2 {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0; /* Убираем padding у кнопки "Выйти" */
+    }
+
+    p {
+        margin: 0;
+    }
+
+</style>

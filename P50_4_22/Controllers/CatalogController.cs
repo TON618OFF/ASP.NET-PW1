@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using P50_4_22.Models;
+using System.Security.Claims;
 
 namespace P50_4_22.Controllers
 {
@@ -66,18 +67,27 @@ namespace P50_4_22.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("ProductDetails/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id != null)
+            if (id == null)
             {
-                Product product = await _context.Products.FirstOrDefaultAsync(Product => Product.IdProduct == id);
-                if(product != null)
-                {
-                    return View(product);
-                }
+                return NotFound();
             }
-            return NotFound();
+
+            var product = await _context.Products
+                .Include(p => p.Reviews) // Подгружаем отзывы
+                    .ThenInclude(r => r.ClientName) // Подгружаем пользователей для каждого отзыва
+                .FirstOrDefaultAsync(p => p.IdProduct == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
         }
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -133,5 +143,51 @@ namespace P50_4_22.Controllers
             }
             return NotFound();
         }
+
+
+        [HttpPost]
+        [Route("Catalog/AddReview")]
+        public async Task<IActionResult> AddReview(Review review)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Authorize/Authorize"); // Если пользователь не авторизован
+            }
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+            {
+                return BadRequest("Не удалось определить пользователя.");
+            }
+
+            // Принудительная конвертация строки в число, если не сработает - устанавливаем 0 (что вызовет ошибку)
+            if (!int.TryParse(Request.Form["ReviewRating"], out int rating))
+            {
+                rating = 0;
+            }
+            review.ReviewRating = rating;
+
+            if (review.ReviewRating < 1 || review.ReviewRating > 5)
+            {
+                ModelState.AddModelError("ReviewRating", "Оценка должна быть от 1 до 5.");
+                return View("Details");
+            }
+
+            if (string.IsNullOrWhiteSpace(review.ReviewComment))
+            {
+                ModelState.AddModelError("ReviewComment", "Комментарий не может быть пустым.");
+                return View("Details");
+            }
+
+            review.ClientNameId = userId;
+            review.ReviewCreatedDate = DateTime.Now;
+
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = review.ProductId });
+        }
+
+
     }
 }
