@@ -55,7 +55,7 @@ public class ClientsController : Controller
     // POST: Clients/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create([Bind("ClientLogin,ClientPassword,ClientSurname,ClientName,ClientMiddleName,Email,PhoneNumber,ClientAddressId,RoleId")] Client client)
+    public async Task<IActionResult> Create(Client client)
     {
         if (ModelState.IsValid)
         {
@@ -63,7 +63,7 @@ public class ClientsController : Controller
             client.ClientPassword = HashPassword(client.ClientPassword);
 
             _context.Add(client);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         return View(client);

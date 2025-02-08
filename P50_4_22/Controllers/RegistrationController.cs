@@ -31,7 +31,6 @@ namespace P50_4_22.Controllers
             string PhoneNumber,
             int ClientAddress_ID)
         {
-            // Проверка на существование пользователя с таким же логином, email или номером телефона
             if (await _context.Clients.AnyAsync(u =>
                 u.ClientLogin == ClientLogin ||
                 u.Email == Email ||
@@ -41,7 +40,6 @@ namespace P50_4_22.Controllers
                 return View("Index");
             }
 
-            // Получение роли Customer
             var customerRoleId = await _context.Roles
                 .Where(r => r.RoleName == "Customer")
                 .Select(r => r.IdRole)
@@ -53,10 +51,8 @@ namespace P50_4_22.Controllers
                 return View("Index");
             }
 
-            // Хеширование пароля
             string hashedPassword = HashPassword(ClientPassword);
 
-            // Создание нового клиента
             var client = new Client
             {
                 ClientLogin = ClientLogin,
@@ -67,14 +63,12 @@ namespace P50_4_22.Controllers
                 Email = Email,
                 PhoneNumber = PhoneNumber,
                 ClientAddressId = ClientAddress_ID,
-                RoleId = customerRoleId // Устанавливаем роль 'Customer'
+                RoleId = customerRoleId 
             };
 
-            // Добавление клиента в базу данных
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            // Перенаправление на главную страницу
             return RedirectToAction("Index", "Home");
         }
 

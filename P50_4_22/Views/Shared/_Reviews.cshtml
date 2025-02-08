@@ -1,0 +1,67 @@
+﻿@model P50_4_22.Models.Review
+
+<div class="review-container">
+    <h2>Оставить отзыв</h2>
+    <form method="post" action="/Reviews/Submit">
+        <label for="userName">Ваше имя:</label>
+        <input type="text" id="userName" name="UserName" required />
+
+        <label for="rating">Оценка:</label>
+        <select id="rating" name="Rating" required>
+            <option value="1">1 ⭐</option>
+            <option value="2">2 ⭐⭐</option>
+            <option value="3">3 ⭐⭐⭐</option>
+            <option value="4">4 ⭐⭐⭐⭐</option>
+            <option value="5">5 ⭐⭐⭐⭐⭐</option>
+        </select>
+
+        <label for="comment">Комментарий:</label>
+        <textarea id="comment" name="Comment" rows="4" required></textarea>
+
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+
+<style>
+    .review-container {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 40px auto 0;
+    }
+
+        .review-container h2 {
+            margin-bottom: 15px;
+        }
+
+        .review-container label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .review-container input, .review-container select, .review-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .review-container button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+            .review-container button:hover {
+                background-color: #219150;
+            }
+</style>
